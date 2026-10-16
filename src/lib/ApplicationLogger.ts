@@ -1,7 +1,7 @@
 import { LoggerLevel } from './LoggerLevel';
 
 export interface LoggerFunction {
-  (level: LoggerLevel, loggerName: string, message: string, ...args: any[]): void;
+  (level: LoggerLevel, loggerName: string, message: string, ...args: any[]): void,
 }
 
 /**

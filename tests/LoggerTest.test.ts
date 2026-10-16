@@ -1,12 +1,14 @@
-import { expect } from 'chai';
-import { ApplicationLogger, LoggerFunction, LoggerLevel, Logger } from '../src';
+import { expect, beforeEach, describe, it } from 'vitest';
+import {
+  ApplicationLogger, LoggerFunction, LoggerLevel, Logger,
+} from '../src';
 
 describe('Logger', () => {
   type LastLog = {
-    level: LoggerLevel;
-    loggerName: string;
-    message: string;
-    args: any[];
+    level: LoggerLevel,
+    loggerName: string,
+    message: string,
+    args: any[],
   };
   let lastLog: LastLog | undefined;
   const loggerFunctionTest: LoggerFunction = (level: LoggerLevel, loggerName: string, message: string, ...args: any[]) => {
@@ -26,12 +28,12 @@ describe('Logger', () => {
 
   describe('Logger level', () => {
     const testLogger = (loggerLevel: LoggerLevel) => {
-      expect(lastLog).to.not.be.undefined;
-      if(lastLog) {
-        expect(lastLog.loggerName).to.equal('Test');
-        expect(lastLog.level).to.equal(loggerLevel);
-        expect(lastLog.message).to.equal('Message');
-        expect(lastLog.args).to.eql([]);
+      expect(lastLog).not.toBeUndefined();
+      if (lastLog) {
+        expect(lastLog.loggerName).toEqual('Test');
+        expect(lastLog.level).toEqual(loggerLevel);
+        expect(lastLog.message).toEqual('Message');
+        expect(lastLog.args).toEqual([]);
       }
     };
     it('Logger info', () => {
@@ -60,28 +62,28 @@ describe('Logger', () => {
     it('1 argument', () => {
       const logger = new Logger('Test');
       logger.info('Message', '1st arg');
-      expect(lastLog).to.not.be.undefined;
-      if(lastLog) {
-        expect(lastLog.message).to.equal('Message');
-        expect(lastLog.args).to.eql(['1st arg']);
+      expect(lastLog).not.toBeUndefined();
+      if (lastLog) {
+        expect(lastLog.message).toEqual('Message');
+        expect(lastLog.args).toEqual(['1st arg']);
       }
     });
     it('2 arguments', () => {
       const logger = new Logger('Test');
       logger.info('Message', '1st arg', '2nd arg');
-      expect(lastLog).to.not.be.undefined;
-      if(lastLog) {
-        expect(lastLog.message).to.equal('Message');
-        expect(lastLog.args).to.eql(['1st arg', '2nd arg']);
+      expect(lastLog).not.toBeUndefined();
+      if (lastLog) {
+        expect(lastLog.message).toEqual('Message');
+        expect(lastLog.args).toEqual(['1st arg', '2nd arg']);
       }
     });
     it('3 arguments', () => {
       const logger = new Logger('Test');
-      logger.info('Message', '1st arg', '2nd arg', {a: '3'});
-      expect(lastLog).to.not.be.undefined;
-      if(lastLog) {
-        expect(lastLog.message).to.equal('Message');
-        expect(lastLog.args).to.eql(['1st arg', '2nd arg', {a: '3'}]);
+      logger.info('Message', '1st arg', '2nd arg', { a: '3' });
+      expect(lastLog).not.toBeUndefined();
+      if (lastLog) {
+        expect(lastLog.message).toEqual('Message');
+        expect(lastLog.args).toEqual(['1st arg', '2nd arg', { a: '3' }]);
       }
     });
   });
@@ -89,11 +91,11 @@ describe('Logger', () => {
   describe('Logger generic log', () => {
     it('generic 3 arguments', () => {
       const logger = new Logger('Test');
-      logger.log(LoggerLevel.DEBUG, 'Message', '1st arg', '2nd arg', {a: '3'});
-      expect(lastLog).to.not.be.undefined;
-      if(lastLog) {
-        expect(lastLog.message).to.equal('Message');
-        expect(lastLog.args).to.eql(['1st arg', '2nd arg', {a: '3'}]);
+      logger.log(LoggerLevel.DEBUG, 'Message', '1st arg', '2nd arg', { a: '3' });
+      expect(lastLog).not.toBeUndefined();
+      if (lastLog) {
+        expect(lastLog.message).toEqual('Message');
+        expect(lastLog.args).toEqual(['1st arg', '2nd arg', { a: '3' }]);
       }
     });
   });

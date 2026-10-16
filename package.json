@@ -13,19 +13,19 @@
     "slf4j"
   ],
   "scripts": {
-    "build": "npm run tsc:cjs && npm run tsc:esm",
+    "build": "yarn tsc:cjs && yarn tsc:esm",
     "tsc:cjs": "tsc --module commonjs --outDir build/cjs -p tsconfig.json",
     "tsc:esm": "tsc --module esnext --outDir build/esm -p tsconfig.json",
-    "clean": "rm -rf build",
+    "clean": "node -e \"require('node:fs').rmSync('build',{recursive:true,force:true})\"",
     "lint": "tsc --noEmit --outDir build/esm -p tsconfig.json && eslint src --ext .ts",
-    "prepare-release": "npm run clean && npm run lint && npm run test && npm run build",
+    "prepare-release": "yarn clean && yarn lint && yarn test && yarn build",
     "release": "release-it",
-    "test": "mocha -r ts-node/register 'tests/**/*.ts'"
+    "test": "vitest run"
   },
   "release-it": {
     "hooks": {
       "before:init": [
-        "npm run prepare-release"
+        "yarn prepare-release"
       ]
     }
   },
@@ -33,24 +33,23 @@
   "typings": "build/esm/index.d.ts",
   "module": "build/esm/index.js",
   "engines": {
-    "node": ">=10"
+    "node": ">=20"
   },
+  "packageManager": "yarn@4.12.0",
   "devDependencies": {
-    "@types/chai": "^4.2.21",
-    "@types/mocha": "^8.2.3",
-    "@typescript-eslint/eslint-plugin": "^4.0.1",
-    "@typescript-eslint/parser": "^4.0.1",
-    "chai": "^4.3.4",
-    "eslint": "^7.8.0",
-    "eslint-config-airbnb-typescript": "^12.0.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "mocha": "^9.0.2",
-    "release-it": "^14.10.0",
-    "ts-node": "^10.1.0",
-    "typedoc": "^0.21.4",
-    "typescript": "^4.0.2"
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "@vitest/coverage-v8": "^5.0.1",
+    "eslint": "^9.39.2",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "release-it": "^19.2.4",
+    "typedoc": "^0.28.14",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
   },
   "files": [
     "build/**/*.*"

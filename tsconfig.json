@@ -39,9 +39,7 @@
     "lib": [
       "es2017",
       "dom"
-    ],
-    "types": ["mocha"],
-    "typeRoots": ["node_modules/@types", "src/types"]
+    ]
   },
   "include": [
     "src/**/*.ts",
